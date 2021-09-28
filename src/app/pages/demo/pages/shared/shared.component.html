@@ -1,0 +1,9 @@
+<form [formGroup]="form" novalidate autocomplete="off" (ngSubmit)="onSubmit()">
+
+    <app-button (click)="organizeElement()">Organizar</app-button>
+    <app-button (click)="onPatchValue()">agregar Texto</app-button>
+    <br><br>
+    <app-form-field label="input" [required]="true" [control]="form.controls.input" [isInline]="isInline" [patternError]="regexErrors.email">
+    <app-input formControlName="input"></app-input>
+  </app-form-field>
+</form>
