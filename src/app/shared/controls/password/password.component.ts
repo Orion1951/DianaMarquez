@@ -58,11 +58,12 @@ export class PasswordComponent implements OnInit, ControlValueAccessor {
   onKeyup(event: Event){
     const {target} = event;
     this.value = (target as HTMLInputElement).value;
+    this.propagateChange(this.value);
     this.changed.emit(this.value);
   }
 
   onBlur():void {
-
+    this.propagateTouched();
   }
 
   togglePassword():void {

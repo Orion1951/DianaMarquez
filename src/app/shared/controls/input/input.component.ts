@@ -15,15 +15,15 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 })
 export class InputComponent implements OnInit, ControlValueAccessor {
 
-  @Input() placeholder: string = '';
+  @Input() placeholder!: string ;
   @Output() changed = new EventEmitter<string>();
   
   value:string= '';
   isDisabled: boolean = false;
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {  }
+  
   private propagateChange: any = () => { }
   private propagateTouched: any = () => { }
   writeValue(value:string):void { 

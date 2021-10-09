@@ -54,7 +54,19 @@ export class SharedComponent implements OnInit {
     select: [null , 
       {
         updateOn: 'change', 
-        validators: [Validators.required]}]
+        validators: [Validators.required]}],
+    checkboxes: [null,
+      {
+        updateOn: 'change', 
+        validators: [Validators.required]}],
+    radios: [null,
+      {
+        updateOn: 'change', 
+        validators: [Validators.required]}],
+    date: [null,
+      {
+        updateOn: 'change', 
+        validators: [Validators.required]}],
   });
   }
   onPatchValue(): void {
