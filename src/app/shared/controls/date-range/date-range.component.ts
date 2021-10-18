@@ -39,6 +39,16 @@ export class DateRangeComponent implements OnInit, ControlValueAccessor {
     })
   }
 
+  get min(): Date{
+    const from = this.form.controls.from.value;
+    return from ? new Date(from): new Date();
+  }
+
+  get max(): Date{
+    const to = this.form.controls.to.value;
+    return to ? new Date(to): new Date();
+  }
+
   private propagateChange: any = () => { }
   private propagateTouched: any = () => { }
 
@@ -54,6 +64,22 @@ export class DateRangeComponent implements OnInit, ControlValueAccessor {
     this.propagateTouched = fn;
   }
 
+  setDisabledState(isDisabled: boolean): void{
+    if(isDisabled){
+      this.form.disable();
+    }else{
+      this.form.enable();
+    }
+  }
 
+  onChanged(): void{
+    const value = {...this.form.value};
+    this.propagateChange(value);
+    this.changed.emit(value);
+  }
+
+  onClosed():void{
+    this.propagateTouched();
+  }
 
 }

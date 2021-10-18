@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {AngularFirestore} from '@angular/fire/firestore';
+import { Store, select } from '@ngrx/store';
+import * as fromRoot from './store';
+import * as fromDictionaries from './store/dictionaries';
+import * as fromUser from './store/user';
+import { Observable } from 'rxjs';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,11 +12,18 @@ import {AngularFirestore} from '@angular/fire/firestore';
 })
 export class AppComponent implements OnInit {
   title = 'DianaMarquez';
-  /**
-   *
-   */
-  constructor(private fs: AngularFirestore) {
+  isAuthorized$ !:Observable<boolean>;
+
+  constructor(private store: Store<fromRoot.State>) {
     
   }
-  ngOnInit() {}
+  ngOnInit() {
+    this.isAuthorized$ = this.store.pipe(select(fromUser.getIsAuthorized))
+    this.store.dispatch(new fromUser.Init());
+    this.store.dispatch(new fromDictionaries.Read());
+  }
+
+  onSignOut(): void{
+    this.store.dispatch(new fromUser.SignOut());
+  }
 }
